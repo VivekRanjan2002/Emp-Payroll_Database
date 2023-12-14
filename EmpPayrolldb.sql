@@ -47,3 +47,51 @@ mysql> select * from employee_payroll;
 |  3 | Amit   | 300000 | 16/12/2023 |
 +----+--------+--------+------------+
 3 rows in set (0.01 sec)
+
+<--UC5 Retreive salary for particular employee as well as employees within certain range of startDate-->
+mysql> update employee_payroll
+    -> set startDate="2023-10-10"
+    -> where name="Vivek";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll
+    -> set startDate="2023-11-11"
+    -> where name="Ranjan";
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update employee_payroll
+    -> set startDate="2023-12-12"
+    -> where name="Amit";
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> Alter Table employee_payroll
+    -> Modify startDate DATE;
+Query OK, 3 rows affected (0.08 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee_payroll;
++----+--------+--------+------------+
+| Id | name   | salary | startDate  |
++----+--------+--------+------------+
+|  1 | Vivek  | 100000 | 2023-10-10 |
+|  2 | Ranjan | 200000 | 2023-11-11 |
+|  3 | Amit   | 300000 | 2023-12-12 |
++----+--------+--------+------------+
+3 rows in set (0.00 sec)
+mysql> select salary from employee_payroll where name="Vivek";
++--------+
+| salary |
++--------+
+| 100000 |
++--------+
+1 row in set (0.00 sec)
+mysql> select * from employee_payroll where startDate BETWEEN CAST('2023-11-01' AS DATE) AND DATE(NOW());
++----+--------+--------+------------+
+| Id | name   | salary | startDate  |
++----+--------+--------+------------+
+|  2 | Ranjan | 200000 | 2023-11-11 |
+|  3 | Amit   | 300000 | 2023-12-12 |
++----+--------+--------+------------+
