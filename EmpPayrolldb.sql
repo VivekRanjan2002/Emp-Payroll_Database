@@ -177,3 +177,21 @@ mysql> select * from employee_payroll;
 mysql> Alter Table employee_payroll
     -> add BasicPay float,add Deductions float,add TaxablePay float, add Tax float,add NetPay float;
 Query OK, 0 rows affected (0.06 sec) 
+
+<--UC10 add person for more than one department-->
+mysql> insert into employee_payroll(name,salary,startDate,gender,department)
+    -> values("Terrisa",400000,"2023-06-06",'F',"Sales");
+Query OK, 1 row affected (0.06 sec)
+mysql> insert into employee_payroll(name,salary,startDate,gender,department)
+    -> values("Terrisa",400000,"2023-06-06",'F',"Marketing");
+Query OK, 1 row affected (0.01 sec)
+mysql> select *from employee_payroll;
++----+---------+--------+------------+--------+-------+---------+------------+----------+------------+------------+------+--------+
+| Id | name    | salary | startDate  | gender | phone | address | department | BasicPay | Deductions | TaxablePay | Tax  | NetPay |
++----+---------+--------+------------+--------+-------+---------+------------+----------+------------+------------+------+--------+
+|  1 | Vivek   | 100000 | 2023-10-10 | M      | NULL  | Address |            |     NULL |       NULL |       NULL | NULL |   NULL |
+|  2 | Ranjan  | 200000 | 2023-11-11 | M      | NULL  | Address |            |     NULL |       NULL |       NULL | NULL |   NULL |
+|  3 | Amit    | 300000 | 2023-12-12 | M      | NULL  | Address |            |     NULL |       NULL |       NULL | NULL |   NULL |
+|  4 | Terrisa | 400000 | 2023-06-06 | F      | NULL  | Address | Sales      |     NULL |       NULL |       NULL | NULL |   NULL |
+|  5 | Terrisa | 400000 | 2023-06-06 | F      | NULL  | Address | Marketing  |     NULL |       NULL |       NULL | NULL |   NULL |
++----+---------+--------+------------+--------+-------+---------+------------+----------+------------+------------+------+--------+
