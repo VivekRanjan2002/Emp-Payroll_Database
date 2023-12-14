@@ -36,6 +36,8 @@ Query OK, 1 row affected (0.00 sec)
 mysql> insert into employee_payroll(name,salary,startDate)
     -> values("Amit",300000,"16/12/2023");
 Query OK, 1 row affected (0.00 sec)
+
+<--UC4 Retrieve all the data from table-->
 mysql> select * from employee_payroll;
 +----+--------+--------+------------+
 | Id | name   | salary | startDate  |
