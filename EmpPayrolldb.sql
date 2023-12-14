@@ -95,3 +95,22 @@ mysql> select * from employee_payroll where startDate BETWEEN CAST('2023-11-01' 
 |  2 | Ranjan | 200000 | 2023-11-11 |
 |  3 | Amit   | 300000 | 2023-12-12 |
 +----+--------+--------+------------+
+
+<--UC6 add gender column in table-->
+mysql> alter table employee_payroll
+    -> add column gender CHAR;
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+mysql> update employee_payroll
+    -> set gender='M';
+Query OK, 3 rows affected (0.01 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+mysql> select * from employee_payroll;
++----+--------+--------+------------+--------+
+| Id | name   | salary | startDate  | gender |
++----+--------+--------+------------+--------+
+|  1 | Vivek  | 100000 | 2023-10-10 | M      |
+|  2 | Ranjan | 200000 | 2023-11-11 | M      |
+|  3 | Amit   | 300000 | 2023-12-12 | M      |
++----+--------+--------+------------+--------+
+3 rows in set (0.01 sec)
