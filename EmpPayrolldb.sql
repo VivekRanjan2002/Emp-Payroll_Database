@@ -159,3 +159,16 @@ group by gender;
 |      300000 |
 +-------------+
 1 row in set (0.01 sec)
+
+<--UC8 add new fields -->
+mysql> alter table employee_payroll
+    -> add phone varchar(20), add address varchar(255) DEFAULT "Address",add department varchar(100) NOT NULL;
+Query OK, 0 rows affected (0.07 sec)
+mysql> select * from employee_payroll;
++----+--------+--------+------------+--------+-------+---------+------------+
+| Id | name   | salary | startDate  | gender | phone | address | department |
++----+--------+--------+------------+--------+-------+---------+------------+
+|  1 | Vivek  | 100000 | 2023-10-10 | M      | NULL  | Address |            |
+|  2 | Ranjan | 200000 | 2023-11-11 | M      | NULL  | Address |            |
+|  3 | Amit   | 300000 | 2023-12-12 | M      | NULL  | Address |            |
++----+--------+--------+------------+--------+-------+---------+------------+
