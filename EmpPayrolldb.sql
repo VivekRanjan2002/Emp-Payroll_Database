@@ -114,3 +114,48 @@ mysql> select * from employee_payroll;
 |  3 | Amit   | 300000 | 2023-12-12 | M      |
 +----+--------+--------+------------+--------+
 3 rows in set (0.01 sec)
+
+<--UC7 retrieve data with conditions-->
+<--count of male employee in table-->
+mysql> select count(gender) from employee_payroll where gender='M';
++---------------+
+| count(gender) |
++---------------+
+|             3 |
++---------------+
+1 row in set (0.01 sec)
+<--sum of salary of male employee in table-->
+mysql> select sum(salary) from employee_payroll where gender='M'
+ group by gender;
++-------------+
+| sum(salary) |
++-------------+
+|      600000 |
++-------------+
+1 row in set (0.00 sec)
+<--Avg of salary of male employee in table-->
+mysql> select avg(salary) from employee_payroll where gender='M' group by gender;
++-------------+
+| avg(salary) |
++-------------+
+| 200000.0000 |
++-------------+
+1 row in set (0.00 sec)
+<--Min salary of male employee in table-->
+mysql> select min(salary) from employee_payroll where gender='M'
+group by gender;
++-------------+
+| min(salary) |
++-------------+
+|      100000 |
++-------------+
+1 row in set (0.01 sec)
+<--max salary of male employee in table-->
+mysql> select max(salary) from employee_payroll where gender='M'
+group by gender;
++-------------+
+| max(salary) |
++-------------+
+|      300000 |
++-------------+
+1 row in set (0.01 sec)
