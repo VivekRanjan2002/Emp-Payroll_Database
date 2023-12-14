@@ -172,3 +172,8 @@ mysql> select * from employee_payroll;
 |  2 | Ranjan | 200000 | 2023-11-11 | M      | NULL  | Address |            |
 |  3 | Amit   | 300000 | 2023-12-12 | M      | NULL  | Address |            |
 +----+--------+--------+------------+--------+-------+---------+------------+
+
+<--UC9 add more new fields-->
+mysql> Alter Table employee_payroll
+    -> add BasicPay float,add Deductions float,add TaxablePay float, add Tax float,add NetPay float;
+Query OK, 0 rows affected (0.06 sec) 
