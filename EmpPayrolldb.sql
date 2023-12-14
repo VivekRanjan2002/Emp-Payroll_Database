@@ -22,6 +22,6 @@ mysql> show databases;
 mysql> create Table employee_payroll(
     -> Id INT AUTO_INCREMENT PRIMARY KEY,
     -> name varchar(255) NOT NULL,
-    -> salary varchar(255),
+    -> salary INT,
     -> startDate varchar(255));
 Query OK, 0 rows affected (0.12 sec)
