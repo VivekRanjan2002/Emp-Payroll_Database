@@ -195,3 +195,45 @@ mysql> select *from employee_payroll;
 |  4 | Terrisa | 400000 | 2023-06-06 | F      | NULL  | Address | Sales      |     NULL |       NULL |       NULL | NULL |   NULL |
 |  5 | Terrisa | 400000 | 2023-06-06 | F      | NULL  | Address | Marketing  |     NULL |       NULL |       NULL | NULL |   NULL |
 +----+---------+--------+------------+--------+-------+---------+------------+----------+------------+------------+------+--------+
+
+<--UC11 create New Table EmoloyeeDepartment referencing employee_payroll-->
+mysql> create Table EmployeeDepartment(
+    -> employee_id INT,
+    -> department_id INT,
+    -> FOREIGN KEY (employee_id) REFERENCES employee_payroll(id),
+    -> PRIMARY KEY(employee_id,department_id));
+Query OK, 0 rows affected (0.07 sec)
+mysql> select * from EmployeeDepartment;
++-------------+---------------+
+| employee_id | department_id |
++-------------+---------------+
+|           1 |             1 |
+|           2 |             2 |
+|           3 |             3 |
+|           4 |             4 |
++-------------+---------------+
+4 rows in set (0.00 sec)
+mysql> select
+    -> sum(ep.salary) as total_salary,
+    -> avg(ep.salary) as avg_salary,
+    -> min(ep.salary) as min_salary,
+    -> max(ep.salary) as max_salary
+    -> from
+    -> employee_payroll ep
+    -> join
+    -> EmployeeDepartment ed on ed.employee_id=ep.id;
++--------------+-------------+------------+------------+
+| total_salary | avg_salary  | min_salary | max_salary |
++--------------+-------------+------------+------------+
+|      1000000 | 250000.0000 |     100000 |     400000 |
++--------------+-------------+------------+------------+
+1 row in set (0.00 sec)
+mysql> select ep.gender,count(ep.gender) from employee_payroll ep
+    -> join EmployeeDepartment ed on ed.employee_id=ep.id group by ep.gender;
++--------+------------------+
+| gender | count(ep.gender) |
++--------+------------------+
+| M      |                3 |
+| F      |                1 |
++--------+------------------+
+2 rows in set (0.00 sec)
