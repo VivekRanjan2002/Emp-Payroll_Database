@@ -8,7 +8,7 @@ public class DBConnection {
     public static void main(String[] args) {
         String jdbcURL="jdbc:mysql://localhost:3306/payroll_service?useSSL=false";
         String userName="root";
-        String password="Vivek123";
+        String password="*******";
         Connection connection;
         try{ // mysql driver is loaded or not
             /*
