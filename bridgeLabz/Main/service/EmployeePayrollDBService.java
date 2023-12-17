@@ -3,7 +3,10 @@ import com.bridgeLabz.Main.service.entity.EmployeePayrollData;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
 public class EmployeePayrollDBService {
     private static EmployeePayrollDBService employeePayrollDBService;
     private PreparedStatement employeePayrollDataStatement;
@@ -53,6 +56,24 @@ public class EmployeePayrollDBService {
     public List<EmployeePayrollData> getEmployeeforDateRange(LocalDate startDate, LocalDate endDate) {
         String sqlQuery= String.format("select * from employee_payroll where startDate between '%s' and '%s';",Date.valueOf(startDate),Date.valueOf(endDate));
         return this.getEmployeePayrollDataUsingDB(sqlQuery);
+    }
+    // return map of gender with corresponding average salary
+    public Map<String,Double> getEmployeeAverageSalaryByGender() {
+        String sqlQuery= "select gender,avg(salary) as avg_salary from employee_payroll group by gender;";
+        Map<String,Double> genderToAverageSalaryMap= new HashMap<>();
+        try(Connection connection= this.getConnection()){
+            Statement statement= connection.createStatement();
+            ResultSet resultSet= statement.executeQuery(sqlQuery);
+            while(resultSet.next()){
+                String gender= resultSet.getString("gender");
+                Double salary= resultSet.getDouble("avg_salary");
+                genderToAverageSalaryMap.put(gender,salary);
+            }
+        }
+        catch (SQLException e){
+            throw new RuntimeException();
+        }
+        return genderToAverageSalaryMap;
     }
     // using resultset to populate employeePayrollList
     private List<EmployeePayrollData> getEmployeePayrollData(ResultSet resultSet) {
@@ -125,4 +146,5 @@ public class EmployeePayrollDBService {
 
         return connection;
     }
+
 }
