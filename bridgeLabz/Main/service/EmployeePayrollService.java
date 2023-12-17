@@ -3,11 +3,10 @@ import com.bridgeLabz.Main.service.entity.EmployeePayrollData;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
+
 public class EmployeePayrollService {
-
-
     public enum IOService{CONSOLE_IO,FILE_IO,DB_IO,REST_IO};
-
     private List<EmployeePayrollData> employeePayrollList;
     private  EmployeePayrollDBService EmployeePayrollDBService;
     // getting singleton instance of EmployeePayrollDBService class
@@ -18,7 +17,7 @@ public class EmployeePayrollService {
     this();
     this.employeePayrollList=employeePayrollList;
     }
-   
+
     public List<EmployeePayrollData> readEmployeePayrollData(IOService ioService){
         if(ioService.equals(IOService.DB_IO))
             this.employeePayrollList=  EmployeePayrollDBService.readData();
@@ -43,6 +42,13 @@ public class EmployeePayrollService {
             this.employeePayrollList=EmployeePayrollDBService.getEmployeeforDateRange(startDate,endDate);
         }
         return employeePayrollList;
+    }
+    // read gender with corresponding average salary
+    public Map<String, Double> readAverageSalaryByGender(IOService ioService) {
+        if(ioService.equals(IOService.DB_IO)){
+            return  EmployeePayrollDBService.getEmployeeAverageSalaryByGender();
+        }
+        return  null;
     }
     // return employeePayrolldata from list with name
     private EmployeePayrollData getEmployeePayrollData(String name) {
