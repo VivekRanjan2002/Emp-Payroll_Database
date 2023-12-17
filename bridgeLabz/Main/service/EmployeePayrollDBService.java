@@ -108,7 +108,7 @@ public class EmployeePayrollDBService {
     private Connection  getConnection(){
         String jdbcURL = "jdbc:mysql://localhost:3306/payroll_service?useSSL=false&allowPublicKeyRetrieval=true";
         String username = "root";
-        String password = "Vivek123";
+        String password = "****";
         Connection connection;
         try {
             connection= DriverManager.getConnection(jdbcURL,username,password);
